@@ -37,8 +37,8 @@
     [imagePickerVc setUiImagePickerControllerSettingBlock:^(UIImagePickerController *imagePickerController) {
         imagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
     }];
-     [imagePickerVc.navigationBar setBackgroundImage:[ImageColorHelper createImageWithColor:[UIColor colorWithRed:170/255.0 green:43/255.0 blue:36/255.0 alpha:1] withRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)] forBarMetrics:UIBarMetricsDefault];
-    imagePickerVc.navigationBar.shadowImage = [ImageColorHelper createImageWithColor:[UIColor colorWithRed:170/255.0 green:43/255.0 blue:36/255.0 alpha:1] withRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+     [imagePickerVc.navigationBar setBackgroundImage:[MJUpdateImageVideo createImageWithColor:[UIColor colorWithRed:170/255.0 green:43/255.0 blue:36/255.0 alpha:1] withRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)] forBarMetrics:UIBarMetricsDefault];
+    imagePickerVc.navigationBar.shadowImage = [MJUpdateImageVideo createImageWithColor:[UIColor colorWithRed:170/255.0 green:43/255.0 blue:36/255.0 alpha:1] withRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
     imagePickerVc.iconThemeColor = [UIColor colorWithRed:170/255.0 green:43/255.0 blue:36/255.0 alpha:1];
     imagePickerVc.showPhotoCannotSelectLayer = YES;
     imagePickerVc.cannotSelectLayerColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
@@ -147,5 +147,16 @@
     if (successVedioBlock) {
         successVedioBlock(self.vedioData);
     }
+}
++(UIImage*)createImageWithColor:(UIColor*)color
+{
+    CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
 }
 @end
