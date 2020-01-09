@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZQUtil.h"
+typedef void (^TZPhotoPreviewControllerImgBlock)(UIImage *img);
 @interface TZPhotoPreviewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *models;                  ///< All photo models / 所有图片模型数组
@@ -15,7 +16,9 @@
 @property (nonatomic, assign) NSInteger currentIndex;           ///< Index of the photo user click / 用户点击的图片的索引
 @property (nonatomic, assign) BOOL isSelectOriginalPhoto;       ///< If YES,return original photo / 是否返回原图
 @property (nonatomic, assign) BOOL isCropImage;
-
+-(void)addFinishBlock:(ImageBlock)block;
+@property(nonatomic,copy) TZPhotoPreviewControllerImgBlock
+returnImgBlock;
 /// Return the new selected photos / 返回最新的选中图片数组
 @property (nonatomic, copy) void (^backButtonClickBlock)(BOOL isSelectOriginalPhoto);
 @property (nonatomic, copy) void (^doneButtonClickBlock)(BOOL isSelectOriginalPhoto);

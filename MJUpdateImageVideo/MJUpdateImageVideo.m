@@ -31,6 +31,7 @@
 //    [self pushTZImagePickerControllerWithVC:vc allowPickingMultipleVideo:allowPickingMultipleVideo];
 //    [vc presentViewController:sheetControler animated:YES completion:nil] ;
 }
+
 #pragma mark-代理:上传图片
 - (void)pushTZImagePickerControllerWithVC:(UIViewController *)vc allowPickingMultipleVideo:(BOOL )allowPickingMultipleVideo successImageBlock:(SuccessImageBlock)successImageBlock{
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES allowPickingMultipleVideo:allowPickingMultipleVideo];
@@ -47,13 +48,13 @@
     }];
     
     imagePickerVc.allowPickingImage = YES;
-    imagePickerVc.allowPickingOriginalPhoto = YES;
+    imagePickerVc.allowPickingOriginalPhoto = NO;
     imagePickerVc.allowPickingGif = NO;
     imagePickerVc.allowPickingMultipleVideo = allowPickingMultipleVideo; // 是否可以多选视频
     imagePickerVc.sortAscendingByModificationDate = YES;
     imagePickerVc.allowTakePicture = YES;
     
-    imagePickerVc.showSelectBtn = YES;
+    imagePickerVc.showSelectBtn = NO;
     imagePickerVc.allowCrop = NO;
     imagePickerVc.needCircleCrop = NO;
     imagePickerVc.statusBarStyle = UIStatusBarStyleLightContent;
@@ -69,7 +70,7 @@
         }
         
     }];
-    
+    imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
     [vc presentViewController:imagePickerVc animated:YES completion:nil];
 }
 #pragma mark-代理:上传视频

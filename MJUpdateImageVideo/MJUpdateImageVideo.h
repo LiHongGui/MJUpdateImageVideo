@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
 typedef void (^SuccessImageBlock)(id obj,UIImage *image);
 typedef void (^SuccessVedioBlock)(id obj);

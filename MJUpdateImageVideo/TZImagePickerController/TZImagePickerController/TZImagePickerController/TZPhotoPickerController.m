@@ -18,7 +18,6 @@
 #import "TZLocationManager.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "TZImageRequestOperation.h"
-
 @interface TZPhotoPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate> {
     NSMutableArray *_models;
     
@@ -618,6 +617,17 @@ static CGFloat itemMargin = 5;
         }
     } else {
         TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
+        photoPreviewVc.returnImgBlock = ^(UIImage *img) {
+            NSLog(@"img:%@",img);
+            NSMutableArray *photos = [NSMutableArray array];
+            [photos addObject:img];
+            if (tzImagePickerVc.didFinishPickingPhotosHandle) {
+                tzImagePickerVc.didFinishPickingPhotosHandle(photos,nil,NO);
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+            }
+        };
         photoPreviewVc.currentIndex = index;
         photoPreviewVc.models = _models;
         [self pushPhotoPrevireViewController:photoPreviewVc];
